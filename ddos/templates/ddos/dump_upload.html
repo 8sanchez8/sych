@@ -1,0 +1,14 @@
+{% extends 'default.html' %}
+
+{% block title %} СЫЧ / Загрузка дампов {% endblock %}
+
+{% block content %}
+
+    <div class="container" style="padding-top: 20px">
+        <div class="hero-unit">
+            {% load jfutags %}
+            {% jfu 'ddos/dump_upload_form.html' %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "default.html" %}
+{% load static %}
+
+{% block head %}
+<link href={% static "ddos/css/ddos.css" %} rel="stylesheet">
+{% endblock %}
+
+{% block title %} СЫЧ / Результат анализа{% endblock %}
+
+{% block content %}
+    {% if analysis %}
+        <div style="overflow-x:auto;">
+            <!--<table class = "table table-responsive">-->
+            <table>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Source IP</th>
+                    <th>Source port</th>
+                    <th>Destination IP</th>
+                    <th>Destination port</th>
+                    <th>ServerDescription</th>
+                    <th>HTTP Method</th>
+                    <th>Request URI</th>
+                    <th>Hostname</th>
+                    <th>Useragent</th>
+                    <th>Referer</th>
+                    <th>UserContentType</th>
+                    <th>Content length</th>
+                    <th>Server Response</th>
+                    <th>ServerContentType</th>
+                </tr>
+
+                {% for row in analysis %}
+                    <tr>
+                        <td>
+                            <div style="width: 175px;">{{ row.timestamp }}</div>
+                        </td>
+                        <td>{{ row.sourceIP }}</td>
+                        <td>{{ row.sourcePort }}</td>
+                        <td>{{ row.destinationIP }}</td>
+                        <td>{{ row.destinationPort }}</td>
+                        <td>{{ row.serverDescription }}</td>
+                        <td>{{ row.HTTPMethod }}</td>
+                        <td>{{ row.requestURI }}</td>
+                        <td>{{ row.hostname }}</td>
+                        <td>
+                            <div style="width: 500px;">{{ row.userAgent }}</div>
+                        </td>
+                        <td>{{ row.referer }}</td>
+                        <td>{{ row.userContentType }}</td>
+                        <td>{{ row.contentLength }}</td>
+                        <td>{{ row.serverResponse }}</td>
+                        <td>{{ row.serverContentType }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    {% else %}
+        <p>No analysis for that dump.</p>
+    {% endif %}
+
+{% endblock %}

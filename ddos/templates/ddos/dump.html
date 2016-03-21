@@ -1,0 +1,26 @@
+{% extends "default.html" %}
+{% load static %}
+
+{% block head %}
+<link href={% static "ddos/css/ddos.css" %} rel="stylesheet">
+{% endblock %}
+
+{% block title %} СЫЧ / Список дампов {% endblock %}
+{% block content %}
+    {% if dump_list %}
+        <div style="overflow-x:auto;">
+            <table class = "table table-responsive">
+                <tr>
+                    <th>Dump list</th>
+                </tr>
+                {% for dump in dump_list %}
+                    <tr>
+                        <td><a href="{% url 'ddos:analysis' dump.id %}">{{ dump.name }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <p>No dumps was analyzed.</p>
+    {% endif %}
+{% endblock %}

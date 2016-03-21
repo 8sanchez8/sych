@@ -1,0 +1,141 @@
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{% block title %} ПАК "Сыч" {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+    <!-- Default CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'ddos/css/default.css' %}"/>
+    <!-- Bootstrap Core CSS -->
+    <link href={% static 'ddos/css/bootstrap.min.css' %} rel='stylesheet' type='text/css'/>
+    <!-- Custom CSS -->
+    <link href={% static "ddos/css/style-cleaned.css" %} rel='stylesheet' type='text/css'/>
+    <!-- Graph CSS -->
+    <link href={% static "ddos/css/lines.css" %} rel='stylesheet' type='text/css'/>
+    <link href={% static "ddos/css/font-awesome.css" %} rel="stylesheet">
+    <!-- jQuery -->
+    <script src={% static "ddos/js/jquery.min.js" %}></script>
+    <!----webfonts--->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+    <!---//webfonts--->
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src={% static "ddos/js/metisMenu.min.js" %}></script>
+    <script src={% static "ddos/js/custom.js" %}></script>
+    <!-- Graph JavaScript -->
+    <script src={% static "ddos/js/d3.v3.js" %}></script>
+    <script src={% static "ddos/js/rickshaw.js" %}></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src={% static "ddos/js/bootstrap.min.js" %}></script>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href={% url 'dashboard' %}>ПАК "Сыч"</a>
+        </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
+                    <img src= {% static 'ddos/images/1.png' %}><span class="badge">9</span></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-menu-header text-center">
+                        <strong>Профиль</strong>
+                    </li>
+                    <li class="m_2"><a href="#"><i class="fa fa-bell-o"></i> Обновления <span
+                            class="label label-info">42</span></a></li>
+                    <li class="m_2"><a href="#"><i class="fa fa-tasks"></i> Задачи <span
+                            class="label label-danger">42</span></a></li>
+                    </li>
+                    <li class="dropdown-menu-header text-center">
+                        <strong>Настройки</strong>
+                    </li>sss
+                    <li class="m_2"><a href="#"><i class="fa fa-user"></i> Профиль</a></li>
+                    <li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Настройки</a></li>
+                    <li class="m_2"><a href="#"><i class="fa fa-file"></i> Проекты <span
+                            class="label label-primary">42</span></a></li>
+                    <li class="divider"></li>
+                    <li class="m_2"><a href="#"><i class="fa fa-lock"></i> Выйти</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" value="Найти..." onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Найти...';}">
+        </form>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href={% url 'dashboard' %}><i class="fa fa-dashboard fa-fw nav_icon"></i>Панель управления</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-upload nav_icon"></i>Дампы<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href={% url 'ddos:dump' %}>Список дампов</a>
+                            </li>
+                            <li>
+                                <a href={% url 'ddos:dump_upload' %}>Загрузить дамп</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-table nav_icon"></i>Анализы<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Список анализов</a>
+                            </li>
+                            <li>
+                                <a href="#">Создать анализ</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Отчёты<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Список отчётов</a>
+                            </li>
+                            <li>
+                                <a href="#">Создать отчёт</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+    <div id="page-wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

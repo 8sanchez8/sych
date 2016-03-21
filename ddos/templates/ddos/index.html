@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src={% static 'ddos/js/jquery-1.11.0.min.js' %}></script>
+    <link href={% static 'ddos/css/style-cleaned.css' %} rel="stylesheet" type="text/css" media="all"/>
+    <title>ПАК "Сыч"</title>
+</head>
+<body id="login">
+<script>
+    function login(event) {
+
+    }
+</script>
+  <div class="login-buttons">
+	  <form action="dashboard">
+		<input type="text" class="text" value="Имя пользователя" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Имя пользователя';}">
+		<input type="password" value="Пароль" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Пароль';}">
+		<div class="submit"><input type="submit" onclick="login(event);" value="Войти"></div>
+	</form>
+  </div>
+</body>
+</html>
