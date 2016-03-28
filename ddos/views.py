@@ -1,14 +1,12 @@
 import os
 
-from django.shortcuts import get_object_or_404, render
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.views import generic
+from django.shortcuts import render
 from django.views.decorators.http import require_POST
-
 from jfu.http import upload_receive, UploadResponse, JFUResponse
 
-from .models import Dump
+from models import Dump, Packet
 
 
 def index(request):
@@ -33,9 +31,8 @@ def dump_upload(request):
 
 
 def analysis(request, dump_id):
-    dump = get_object_or_404(Dump, id=dump_id)
-    analysis_info = dump.analysis.all()
-    return render(request, 'ddos/analysis.html', {'analysis': analysis_info,})
+    packets = Packet.objects.filter(dump=dump_id)
+    return render(request, 'ddos/analysis.html', {'packets': packets,})
 
 
 @require_POST

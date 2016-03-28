@@ -8,7 +8,7 @@
 {% block title %} СЫЧ / Результат анализа{% endblock %}
 
 {% block content %}
-    {% if analysis %}
+    {% if packets %}
         <div style="overflow-x:auto;">
             <!--<table class = "table table-responsive">-->
             <table>
@@ -30,34 +30,34 @@
                     <th>ServerContentType</th>
                 </tr>
 
-                {% for row in analysis %}
+                {% for packet in packets %}
                     <tr>
                         <td>
-                            <div style="width: 175px;">{{ row.timestamp }}</div>
+                            <div style="width: 175px;">{{ packet.timestamp }}</div>
                         </td>
-                        <td>{{ row.sourceIP }}</td>
-                        <td>{{ row.sourcePort }}</td>
-                        <td>{{ row.destinationIP }}</td>
-                        <td>{{ row.destinationPort }}</td>
-                        <td>{{ row.serverDescription }}</td>
-                        <td>{{ row.HTTPMethod }}</td>
-                        <td>{{ row.requestURI }}</td>
-                        <td>{{ row.hostname }}</td>
+                        <td>{{ packet.sourceIP }}</td>
+                        <td>{{ packet.sourcePort }}</td>
+                        <td>{{ packet.destinationIP }}</td>
+                        <td>{{ packet.destinationPort }}</td>
+                        <td>{{ packet.serverDescription }}</td>
+                        <td>{{ packet.HTTPMethod }}</td>
+                        <td>{{ packet.requestURI }}</td>
+                        <td>{{ packet.hostname }}</td>
                         <td>
-                            <div style="width: 500px;">{{ row.userAgent }}</div>
+                            <div style="width: 500px;">{{ packet.userAgent }}</div>
                         </td>
-                        <td>{{ row.referer }}</td>
-                        <td>{{ row.userContentType }}</td>
-                        <td>{{ row.contentLength }}</td>
-                        <td>{{ row.serverResponse }}</td>
-                        <td>{{ row.serverContentType }}</td>
+                        <td>{{ packet.referer }}</td>
+                        <td>{{ packet.userContentType }}</td>
+                        <td>{{ packet.contentLength }}</td>
+                        <td>{{ packet.serverResponse }}</td>
+                        <td>{{ packet.serverContentType }}</td>
                     </tr>
                 {% endfor %}
             </table>
         </div>
 
     {% else %}
-        <p>No analysis for that dump.</p>
+        <p>No packets for that dump.</p>
     {% endif %}
 
 {% endblock %}

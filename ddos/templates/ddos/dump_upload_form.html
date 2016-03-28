@@ -120,7 +120,7 @@
                                 role="progressbar"
                                 aria-valuemin="0" aria-valuemax="100"
                         >
-                            <div class="progress-bar progress-bar-success" style="width:0%;">
+                            <div class="progress-bar progress-bar-success">
                             </div>
                         </div>
                         {% comment %}
@@ -157,6 +157,10 @@
 
 {% block JS_DOWNLOAD_TEMPLATE_PREVIEW %}
 {% endblock %}
+
+{% block JS_UPLOAD_TEMPLATE_PREVIEW %}
+{% endblock %}
+
 
 {% block JS_DOWNLOAD_TEMPLATE_DELETE %}
     <td>

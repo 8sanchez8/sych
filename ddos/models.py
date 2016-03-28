@@ -1,13 +1,43 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import os
-
 from django.core.validators import MaxValueValidator
 from django.db import models
 
 
-class Analysis(models.Model):
+class Dump(models.Model):
+    file = models.FileField(upload_to="upload/")
+    name = models.CharField(max_length=200, default=file.name, null=file.name)
+
+    # class Dump(models.Model):
+    #     #analysis = models.ManyToManyField(Analysis)
+    #     file = models.FileField(upload_to='ddos/upload')
+    #     dumpName = file.name
+    #     slug = models.SlugField(max_length=50, blank=True)
+    #
+    #     class Meta:
+    #         verbose_name_plural = "Dumps"
+    def __str__(self):
+        return str(self.name)
+        #
+        #     @models.permalink
+        #     def get_absolute_url(self):
+        #         return ('ddos/upload', )
+        #
+        # def save(self, *args, **kwargs):
+        # self.slug = self.file.name
+
+    #	super(Dump, self).save(*args, **kwargs)
+    #
+    #     def delete(self, *args, **kwargs):
+    #         """delete -- Remove to leave file."""
+    #         self.file.delete(False)
+    #         super(Dump, self).delete(*args, **kwargs)
+
+
+class Packet(models.Model):
+    # FK для соответствующего дампа
+    dump = models.ManyToManyField(Dump)
     # Содержит метку времени получения/отправки пакета.
     timestamp = models.DateTimeField(null=True)
     # Содержит IP-адрес источника пакета.
@@ -41,37 +71,11 @@ class Analysis(models.Model):
     serverContentType = models.CharField(max_length=200, null=True)
 
     class Meta:
-        verbose_name_plural = "Analyzes"
+        verbose_name_plural = "Packets"
 
     def __str__(self):
         return str(self.id)
 
 
-class Dump(models.Model):
-    file = models.FileField(upload_to="upload/")
-    name = models.CharField(max_length=200, default=file.name)
-
-    # class Dump(models.Model):
-    #     #analysis = models.ManyToManyField(Analysis)
-    #     file = models.FileField(upload_to='ddos/upload')
-    #     dumpName = file.name
-    #     slug = models.SlugField(max_length=50, blank=True)
-    #
-    #     class Meta:
-    #         verbose_name_plural = "Dumps"
-    #
-    #     def __unicode__(self):
-    #         return self.file.name
-    #
-    #     @models.permalink
-    #     def get_absolute_url(self):
-    #         return ('ddos/upload', )
-    #
-    #     def save(self, *args, **kwargs):
-    #         self.slug = self.file.name
-    #         super(Dump, self).save(*args, **kwargs)
-    #
-    #     def delete(self, *args, **kwargs):
-    #         """delete -- Remove to leave file."""
-    #         self.file.delete(False)
-    #         super(Dump, self).delete(*args, **kwargs)
+class Test(models.Model):
+    name = models.CharField(max_length=200)
