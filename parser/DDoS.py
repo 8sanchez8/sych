@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
 
-import dpkt
 import psycopg2
 
-import http
+import dpkt
+from parser.dpkt import http
 
 
 class DDoS(object):

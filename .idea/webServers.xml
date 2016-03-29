@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9caeec17-95b2-4fec-b788-2fed65e49c1f" name="sych_server" url="http://192.168.161.128">
+        <fileTransfer host="192.168.161.128" port="22" accessType="SFTP" password="dfdfdfd9dfcfdfd8" username="user">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
