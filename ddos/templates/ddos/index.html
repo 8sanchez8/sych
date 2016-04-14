@@ -12,16 +12,14 @@
     <title>ПАК "Сыч"</title>
 </head>
 <body id="login">
-<script>
-    function login(event) {
-
-    }
-</script>
   <div class="login-buttons">
-	  <form action="dashboard">
-		<input type="text" class="text" value="Имя пользователя" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Имя пользователя';}">
-		<input type="password" value="Пароль" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Пароль';}">
-		<div class="submit"><input type="submit" onclick="login(event);" value="Войти"></div>
+      <form method="post" action="{% url django.contrib.auth.views.login %}">
+          <input id="id_username" name="username" type="text" class="text" value="Имя пользователя"
+                 onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Имя пользователя';}">
+          <input id="id_password" name="password" type="password" value="Пароль" onfocus="this.value = '';"
+                 onblur="if (this.value == '') {this.value = 'Пароль';}">
+          <input type="submit" value="Войти"/>
+          <input type="hidden" name="next" value="{{ next }}"/>
 	</form>
   </div>
 </body>

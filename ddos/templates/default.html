@@ -78,7 +78,8 @@
                     <li class="m_2"><a href="#"><i class="fa fa-file"></i> Проекты <span
                             class="label label-primary">42</span></a></li>
                     <li class="divider"></li>
-                    <li class="m_2"><a href="#"><i class="fa fa-lock"></i> Выйти</a></li>
+                    <li class="m_2"><a href="{% url 'django.contrib.auth.views.logout' %}"><i class="fa fa-lock"></i>
+                        Выйти</a></li>
                 </ul>
             </li>
         </ul>

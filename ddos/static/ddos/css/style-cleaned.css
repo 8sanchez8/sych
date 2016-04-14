@@ -940,3 +940,9 @@ body#login {
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
 }
+
+.login-buttons label[type="error"] {
+    color: red;
+    background-color: whitesmoke;
+
+}

@@ -1,8 +1,9 @@
 import os
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from jfu.http import upload_receive, UploadResponse, JFUResponse
 
@@ -11,20 +12,26 @@ from models import Dump, Packet
 
 def index(request):
     context = {}
-    return render(request, 'ddos/index.html', context)
+    if request.user.is_authenticated():
+        return redirect('/dashboard', context)
+    else:
+        return redirect('/login')
 
 
+@login_required
 def dashboard(request):
     context = {}
     return render(request, 'ddos/dashboard.html', context)
 
 
+@login_required
 def dump_list(request):
     dumps = Dump.objects.order_by('-id')
     context = {'dump_list': dumps,}
     return render(request, 'ddos/dump.html', context)
 
 
+@login_required
 def dump_upload(request):
     context = {}
     return render(request, 'ddos/dump_upload.html', context)

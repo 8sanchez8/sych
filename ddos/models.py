@@ -8,31 +8,14 @@ from django.db import models
 class Dump(models.Model):
     file = models.FileField(upload_to="upload/")
     name = models.CharField(max_length=200, default=file.name, null=file.name)
+    timestamp = models.DateTimeField(null=True)
+    packets_count = models.PositiveIntegerField(null=True)
 
-    # class Dump(models.Model):
-    #     #analysis = models.ManyToManyField(Analysis)
-    #     file = models.FileField(upload_to='ddos/upload')
-    #     dumpName = file.name
-    #     slug = models.SlugField(max_length=50, blank=True)
-    #
-    #     class Meta:
-    #         verbose_name_plural = "Dumps"
+    class Meta:
+        verbose_name_plural = "Dumps"
+
     def __str__(self):
         return str(self.name)
-        #
-        #     @models.permalink
-        #     def get_absolute_url(self):
-        #         return ('ddos/upload', )
-        #
-        # def save(self, *args, **kwargs):
-        # self.slug = self.file.name
-
-    #	super(Dump, self).save(*args, **kwargs)
-    #
-    #     def delete(self, *args, **kwargs):
-    #         """delete -- Remove to leave file."""
-    #         self.file.delete(False)
-    #         super(Dump, self).delete(*args, **kwargs)
 
 
 class Packet(models.Model):
