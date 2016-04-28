@@ -36,7 +36,7 @@ def dump_upload(request):
     context = {}
     return render(request, 'ddos/dump_upload.html', context)
 
-
+@login_required
 def analysis(request, dump_id):
     packets = Packet.objects.filter(dump=dump_id)
     return render(request, 'ddos/analysis.html', {'packets': packets,})

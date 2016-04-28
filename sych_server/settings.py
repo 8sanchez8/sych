@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'django',
         'PASSWORD': 'django',
-        'HOST': '192.168.161.128',
+        'HOST': '127.0.0.1',
     }
 }
 
@@ -108,6 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Login redirect URL
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/dashboard'
 
 
 # Internationalization
