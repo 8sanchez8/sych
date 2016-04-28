@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static "ddos/favicon/favicon.ico" %}"/>
+    <!-- JQuery -->
+    <script src={% static 'ddos/js/jquery-1.11.0.min.js' %}></script>
+    <!-- CSS -->
+    <link href={% static 'ddos/css/style-cleaned.css' %} rel="stylesheet" type="text/css" media="all"/>
+    <title>ПАК "Сыч"</title>
+</head>
+<body id="login">
+<div class="login-buttons">
+    <form method="post" action="{% url 'login' %}">
+        {% if form.errors %}
+            <label type="error">Неверное имя пользователя/пароль</label>
+        {% else %}
+            <label></label>
+        {% endif %}
+
+        {% csrf_token %}
+        <input id="id_username" name="username" type="text" class="text" value="Имя пользователя"
+               onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Имя пользователя';}">
+        <input id="id_password" name="password" type="password" value="Пароль" onfocus="this.value = '';"
+               onblur="if (this.value == '') {this.value = 'Пароль';}">
+        <input type="submit" value="Войти"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+</div>
+</body>
+</html>

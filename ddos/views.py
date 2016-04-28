@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import datetime
 
@@ -9,6 +11,7 @@ from django.views.decorators.http import require_POST
 from jfu.http import upload_receive, UploadResponse, JFUResponse
 
 from models import Dump, Packet
+from forms import ReportForm
 
 
 def index(request):
@@ -22,25 +25,30 @@ def index(request):
 @login_required
 def dashboard(request):
     context = {}
-    return render(request, 'ddos/dashboard.html', context)
+    return render(request, 'ddos/templates/dashboard.html', context)
 
 
 @login_required
 def dump_list(request):
     dumps = Dump.objects.order_by('-id')
-    context = {'dump_list': dumps,}
-    return render(request, 'ddos/dump.html', context)
+    # TODO: Перенести подсчёт количества пакетов в парсер
+    for dump in dumps:
+        if dump.packets_count is None:
+            dump.packets_count = Packet.objects.filter(dump=dump.id).count()
+            dump.save()
+    context = {'dump_list': dumps, }
+    return render(request, 'ddos/templates/dump/list.html', context)
 
 
 @login_required
 def dump_upload(request):
     context = {}
-    return render(request, 'ddos/dump_upload.html', context)
+    return render(request, 'ddos/templates/dump/upload.html', context)
 
 @login_required
-def analysis(request, dump_id):
+def dump_packets(request, dump_id):
     packets = Packet.objects.filter(dump=dump_id)
-    return render(request, 'ddos/analysis.html', {'packets': packets,})
+    return render(request, 'ddos/templates/dump/packets.html', {'packets': packets,})
 
 
 @require_POST
@@ -77,3 +85,15 @@ def upload_delete(request, pk):
         success = False
 
     return JFUResponse(request, success)
+
+
+@login_required
+def report_list(request):
+
+    return render(request, 'ddos/templates/report/list.html')
+
+
+@login_required
+def report_new(request):
+
+    return render(request, 'ddos/templates/report/new.html', {'form': ReportForm()})

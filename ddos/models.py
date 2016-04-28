@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.core.validators import MaxValueValidator
 from django.db import models
-
+from django.forms import ModelForm
 
 class Dump(models.Model):
     file = models.FileField(upload_to="upload/")
@@ -12,7 +12,8 @@ class Dump(models.Model):
     packets_count = models.PositiveIntegerField(null=True)
 
     class Meta:
-        verbose_name_plural = "Dumps"
+        verbose_name = "Дамп"
+        verbose_name_plural = "Дампы"
 
     def __str__(self):
         return str(self.name)
@@ -54,11 +55,38 @@ class Packet(models.Model):
     serverContentType = models.CharField(max_length=200, null=True)
 
     class Meta:
-        verbose_name_plural = "Packets"
+        verbose_name = "Пакет"
+        verbose_name_plural = "Пакеты"
 
     def __str__(self):
         return str(self.id)
 
 
-class Test(models.Model):
+class Report(models.Model):
     name = models.CharField(max_length=200)
+    # Дампы, на которых основан отчёт
+    dump = models.ManyToManyField(Dump)
+
+    timeStart = models.DateTimeField(null=True)
+    timeEnd = models.DateTimeField(null=True)
+
+    # Продолжительность атаки
+    duration = models.DurationField(null=True)
+    # Общее количество атак (пакетов)
+    count = models.PositiveIntegerField(null=True)
+    # Количество уникальных IP
+    uniqueIP = models.PositiveIntegerField(null=True)
+    # Основные страны-участники атаки
+    countries = models.CharField(max_length=200)
+    # Предполагаемая результативность
+    result = models.CharField(max_length=200)
+    # Предполагаемые управляющие центры
+    controlCenters = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = "Отчёт"
+        verbose_name_plural = "Отчёты"
+
+    def __str__(self):
+        return str(self.name)
+

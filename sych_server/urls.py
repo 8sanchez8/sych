@@ -20,11 +20,11 @@ from ddos import views as ddos_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    url(r'^$', ddos_views.index),
+    url(r'^$', ddos_views.index, name='index'),
     url(r'^dashboard/', ddos_views.dashboard, name="dashboard"),
     url(r'^admin/', admin.site.urls),
-    url(r'^login$', auth_views.login),
-    url(r'^logout?$', auth_views.logout),
+    url(r'^login$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout$', auth_views.logout, {'template_name': 'logout.html'}, name='logout'),
     url(r'^ddos/', include('ddos.urls')),
     url(r'upload/', ddos_views.upload, name='jfu_upload'),
     url(r'^delete/(?P<pk>\d+)$', ddos_views.upload_delete, name='jfu_delete'),

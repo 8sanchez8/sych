@@ -2,17 +2,10 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="sych_server" uploadOnCheckin="1147d3bd-b567-40d8-bf51-526824572565">
     <serverData>
-      <paths name="Copy of project-level server 'sych_server'">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="sych_server">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/user/sych_server" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

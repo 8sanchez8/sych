@@ -78,7 +78,7 @@
                     <li class="m_2"><a href="#"><i class="fa fa-file"></i> Проекты <span
                             class="label label-primary">42</span></a></li>
                     <li class="divider"></li>
-                    <li class="m_2"><a href="{% url 'django.contrib.auth.views.logout' %}"><i class="fa fa-lock"></i>
+                    <li class="m_2"><a href="{% url 'logout' %}"><i class="fa fa-lock"></i>
                         Выйти</a></li>
                 </ul>
             </li>
@@ -121,10 +121,10 @@
                         <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Отчёты<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Список отчётов</a>
+                                <a href={% url 'ddos:report_list' %}>Список отчётов</a>
                             </li>
                             <li>
-                                <a href="#">Создать отчёт</a>
+                                <a href={% url 'ddos:report_new' %}>Создать отчёт</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
