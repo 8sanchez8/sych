@@ -12,7 +12,11 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
+<<<<<<< HEAD
+    <orderEntry type="jdk" jdkName="Python 2.7.10 (/usr/bin/python2.7)" jdkType="Python SDK" />
+=======
     <orderEntry type="jdk" jdkName="Remote Python 2.7.10 (sftp://user@192.168.25.147:22/usr/bin/python)" jdkType="Python SDK" />
+>>>>>>> 0579448b7a8c8a9cea2ac2206aedc3b0af311c05
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

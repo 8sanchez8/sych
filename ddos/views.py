@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import datetime
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -55,7 +54,7 @@ def dump_packets(request, dump_id):
 def upload(request):
     file = upload_receive(request)
 
-    instance = Dump(file=file, name=file.name, timestamp=datetime.datetime.now())
+    instance = Dump(file=file, name=file.name)
     instance.save()
 
     basename = os.path.basename(instance.file.path)

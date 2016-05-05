@@ -11,16 +11,23 @@
         <div style="overflow-x:auto;">
             <table class = "table table-responsive">
                 <tr>
-                    <th colspan="3">Список дампов</th>
+                    <th>Dump list</th>
                 </tr>
+<<<<<<< HEAD:ddos/templates/dump/list.html
+<<<<<<< HEAD:ddos/templates/dump/list.html
                 <th>Имя дампа</th>
                 <th>Дата загрузки</th>
                 <th>Количество пакетов</th>
+=======
+>>>>>>> parent of f7be867... 28.04.2016 Changed dump_list:ddos/templates/ddos/dump.html
+=======
+                <th>Имя дампа</th>
+                <th>Дата загрузки</th>
+                <th>Количество пакетов</th>
+>>>>>>> 0579448b7a8c8a9cea2ac2206aedc3b0af311c05:ddos/templates/dump/list.html
                 {% for dump in dump_list %}
                     <tr>
                         <td><a href="{% url 'ddos:analysis' dump.id %}">{{ dump.name }}</a></td>
-                        <td>{{ dump.timestamp }}</td>
-                        <td>{{ dump.packets_count }}</td>
                     </tr>
                 {% endfor %}
             </table>

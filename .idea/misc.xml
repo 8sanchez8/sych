@@ -10,7 +10,11 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.10 (/usr/bin/python2.7)" project-jdk-type="Python SDK" />
+=======
   <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 2.7.10 (sftp://user@192.168.25.147:22/usr/bin/python)" project-jdk-type="Python SDK" />
+>>>>>>> 0579448b7a8c8a9cea2ac2206aedc3b0af311c05
   <component name="PythonCompatibilityInspectionAdvertiser">
     <option name="version" value="1" />
   </component>
