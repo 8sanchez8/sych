@@ -49,7 +49,9 @@
                         <td>{{ packet.referer }}</td>
                         <td>{{ packet.userContentType }}</td>
                         <td>{{ packet.contentLength }}</td>
-                        <td>{{ packet.serverResponse }}</td>
+                        <td>
+                            <div style="width: 175px;">{{ packet.serverResponse }}</div>
+                        </td>
                         <td>{{ packet.serverContentType }}</td>
                     </tr>
                 {% endfor %}

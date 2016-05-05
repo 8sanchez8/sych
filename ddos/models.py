@@ -38,7 +38,7 @@ class Packet(models.Model):
     # HTTPMethod Содержит информацию о использованном HTTP-методе (GET, POST, HEAD и прочие).
     HTTPMethod = models.CharField(max_length=20, null=True)
     # requestURI Хранит содержимое HTTP-запроса. URLField
-    requestURI = models.URLField(max_length=200, null=True)
+    requestURI = models.URLField(max_length=1024, null=True)
     # hostname Доменное имя узла, которому адресован запрос.
     hostname = models.CharField(max_length=200, null=True)
     # userAgent Содержит информацию о клиентском приложении, сформировавшем HTTP-запрос.
