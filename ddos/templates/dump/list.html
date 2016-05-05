@@ -11,7 +11,7 @@
         <div style="overflow-x:auto;">
             <table class = "table table-responsive">
                 <tr>
-                    <th>Dump list</th>
+                    <th colspan="3">Список дампов</th>
                 </tr>
 <<<<<<< HEAD:ddos/templates/dump/list.html
 <<<<<<< HEAD:ddos/templates/dump/list.html
@@ -28,6 +28,8 @@
                 {% for dump in dump_list %}
                     <tr>
                         <td><a href="{% url 'ddos:analysis' dump.id %}">{{ dump.name }}</a></td>
+			<td>{{ dump.timestamp }}</td>
+			<td>{{ dump.packets_count }}</td>
                     </tr>
                 {% endfor %}
             </table>
