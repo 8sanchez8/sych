@@ -1,9 +1,10 @@
-<<<<<<< HEAD:ddos/templates/dump/packets.html
-{% extends "ddos/templates/default.html" %}
+{% extends "default.html" %}
+
+{% load bootstrap_pagination %}
 {% load static %}
 
 {% block head %}
-<link href={% static "ddos/css/ddos.css" %} rel="stylesheet">
+    <link href={% static "ddos/css/ddos.css" %} rel="stylesheet">
 {% endblock %}
 
 {% block title %} СЫЧ / Результат анализа{% endblock %}
@@ -34,70 +35,7 @@
                 {% for packet in packets %}
                     <tr>
                         <td>
-                            <div style="width: 175px;">{{ packet.timestamp }}</div>
-                        </td>
-                        <td>{{ packet.sourceIP }}</td>
-                        <td>{{ packet.sourcePort }}</td>
-                        <td>{{ packet.destinationIP }}</td>
-                        <td>{{ packet.destinationPort }}</td>
-                        <td>{{ packet.serverDescription }}</td>
-                        <td>{{ packet.HTTPMethod }}</td>
-                        <td>{{ packet.requestURI }}</td>
-                        <td>{{ packet.hostname }}</td>
-                        <td>
-                            <div style="width: 500px;">{{ packet.userAgent }}</div>
-                        </td>
-                        <td>{{ packet.referer }}</td>
-                        <td>{{ packet.userContentType }}</td>
-                        <td>{{ packet.contentLength }}</td>
-                        <td>{{ packet.serverResponse }}</td>
-                        <td>{{ packet.serverContentType }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-
-    {% else %}
-        <p>No packets for that dump.</p>
-    {% endif %}
-
-=======
-{% extends "ddos/templates/default.html" %}
-{% load static %}
-
-{% block head %}
-<link href={% static "ddos/css/ddos.css" %} rel="stylesheet">
-{% endblock %}
-
-{% block title %} СЫЧ / Результат анализа{% endblock %}
-
-{% block content %}
-    {% if packets %}
-        <div style="overflow-x:auto;">
-            <!--<table class = "table table-responsive">-->
-            <table>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Source IP</th>
-                    <th>Source port</th>
-                    <th>Destination IP</th>
-                    <th>Destination port</th>
-                    <th>ServerDescription</th>
-                    <th>HTTP Method</th>
-                    <th>Request URI</th>
-                    <th>Hostname</th>
-                    <th>Useragent</th>
-                    <th>Referer</th>
-                    <th>UserContentType</th>
-                    <th>Content length</th>
-                    <th>Server Response</th>
-                    <th>ServerContentType</th>
-                </tr>
-
-                {% for packet in packets %}
-                    <tr>
-                        <td>
-                            <div style="width: 175px;">{{ packet.timestamp }}</div>
+                            <div style="width: 125px;">{{ packet.timestamp }}</div>
                         </td>
                         <td>{{ packet.sourceIP }}</td>
                         <td>{{ packet.sourcePort }}</td>
@@ -122,9 +60,23 @@
             </table>
         </div>
 
+        <form style="text-align: right; padding-right: 5px; padding-top: 10px">
+            <label for="rows_per_page">Количество строк на странице: </label>
+            <input type="number" id="rows_per_page" min="10" max="100" value="{{ rows }}">
+        </form>
+
+        <div style="text-align: center">
+            {% bootstrap_paginate packets range=20 show_first_last="true" show_prev_next="false" %}
+        </div>
+
     {% else %}
         <p>No packets for that dump.</p>
     {% endif %}
 
->>>>>>> 0579448b7a8c8a9cea2ac2206aedc3b0af311c05:ddos/templates/dump/packets.html
+    <script>
+        $("input[type='number']").change(function () {
+            window.location.search = "rows=" + ($(this).val()) + "&page={{ page }}";
+        });
+    </script>
+
 {% endblock %}

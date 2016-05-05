@@ -6,6 +6,7 @@ import datetime
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from jfu.http import upload_receive, UploadResponse, JFUResponse
@@ -32,7 +33,7 @@ def dashboard(request):
 def dump_list(request):
     dumps = Dump.objects.order_by('-id')
     # TODO: Перенести подсчёт количества пакетов в парсер
-    for dump in dumps:
+    for dump in dumps.iterator():
         if dump.packets_count is None:
             dump.packets_count = Packet.objects.filter(dump=dump.id).count()
             dump.save()
@@ -47,8 +48,19 @@ def dump_upload(request):
 
 @login_required
 def dump_packets(request, dump_id):
-    packets = Packet.objects.filter(dump=dump_id)
-    return render(request, 'ddos/templates/dump/packets.html', {'packets': packets,})
+    rows = request.GET.get('rows', 25)
+    packets_list = Packet.objects.filter(dump=dump_id)
+    paginator = Paginator(packets_list, rows)
+    page = request.GET.get('page', 1)
+    try:
+        packets = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        packets = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        packets = paginator.page(paginator.num_pages)
+    return render(request, 'ddos/templates/dump/packets.html', {'packets': packets, 'page': page, 'rows': rows})
 
 
 @require_POST
