@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout$', auth_views.logout, {'template_name': 'logout.html'}, name='logout'),
-    url(r'^ddos/', include('ddos.urls')),
+    url(r'^ddos/', include('ddos.urls', namespace='ddos')),
     url(r'upload/', ddos_views.upload, name='jfu_upload'),
     url(r'^delete/(?P<pk>\d+)$', ddos_views.upload_delete, name='jfu_delete'),
 ]
