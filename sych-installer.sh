@@ -92,10 +92,11 @@ python $INSTALLATION_PATH/sych/manage.py migrate
 echo "Creating superuser..."
 python $INSTALLATION_PATH/sych/manage.py createsuperuser
 
+echo "Installation succeeded!"
+
 # Тестирование сервера
 echo "Starting server..."
-python $INSTALLATION_PATH/sych/manage.py runserver 0.0.0.0:8080
-
+python $INSTALLATION_PATH/sych/manage.py runserver 0.0.0.0:8080 & firefox http://127.0.0.1:8080
 deactivate
 
 # ======================================== Тело сценария
