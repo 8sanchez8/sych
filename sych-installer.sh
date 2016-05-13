@@ -68,7 +68,7 @@ sudo wget --quiet --show-progress --no-clobber --directory-prefix=$INSTALLATION_
 echo "Unpacking files..."
 sudo unzip -q -u $INSTALLATION_PATH/master.zip -d $INSTALLATION_PATH
 sudo mv $INSTALLATION_PATH/sych-master $INSTALLATION_PATH/sych
-#sudo rm $INSTALLATION_PATH/master.zip
+sudo rm $INSTALLATION_PATH/master.zip
 sudo chown -R $USER $INSTALLATION_PATH/sych
 
 # # Установка виртуального окружения Python
