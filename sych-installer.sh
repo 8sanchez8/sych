@@ -64,11 +64,11 @@ echo "Installation path: $INSTALLATION_PATH..."
 
 # # Скачивание и распаковка актуальной версии проекта
 echo "Downloading files..."
-sudo wget -q -nc -P $INSTALLATION_PATH https://github.com/8sanchez8/sych/archive/master.zip
+sudo wget --quiet --show-progress --no-clobber --directory-prefix=$INSTALLATION_PATH https://github.com/8sanchez8/sych/archive/master.zip
 echo "Unpacking files..."
-unzip -q -u $INSTALLATION_PATH/master.zip -d $INSTALLATION_PATH
-sudo mv $INSTALLATION_PATH/sych-master $sINSTALLATION_PATH/sych
-sudo rm $INSTALLATION_PATH/master.zip
+sudo unzip -q -u $INSTALLATION_PATH/master.zip -d $INSTALLATION_PATH
+sudo mv $INSTALLATION_PATH/sych-master $INSTALLATION_PATH/sych
+#sudo rm $INSTALLATION_PATH/master.zip
 sudo chown -R $USER $INSTALLATION_PATH/sych
 
 # # Установка виртуального окружения Python
