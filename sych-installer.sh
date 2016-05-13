@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Functions ==============================================
+# Функции ==============================================
 
-# return 1 if global command line program installed, else 0
-# example
+# Проверяет наличие в системе установленного пакета, и в случае его отсутствия, устанавливает его
+# Пример использования:
 # echo "node: $(seek_and_install node)"
 function seek_and_install {
   if dpkg -s "$1" 2>/dev/null 1>/dev/null; 
@@ -15,7 +15,10 @@ function seek_and_install {
   	sudo apt-get -qq -o=Dpkg::Use-Pty=0 -y install $1 > /dev/null
   fi  
 }
-# ============================================== Functions
+# ============================================== Функции
+
+
+# Тело сценария ========================================
 
 # Проверка на наличие прав администратора
 if test "`id -u`" -ne 0
@@ -24,7 +27,7 @@ if test "`id -u`" -ne 0
 	exit -1
 fi
 
-# Проверка дистрибьютива
+# Проверка дистрибутива
 if [[ $(lsb_release -si) != *"Ubuntu"* ]]
 then
 	echo "It's not Ubuntu, sorry"
@@ -94,3 +97,5 @@ echo "Starting server..."
 python $INSTALLATION_PATH/sych/manage.py runserver 0.0.0.0:8080
 
 deactivate
+
+# ======================================== Тело сценария
