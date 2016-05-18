@@ -36,8 +36,10 @@ fi
 
 # Проверка и установка зависимостей
  requirements=(
+	"apache2"
 	"git"
-	"libpq-dev" 
+	"libapache2-mod-wsgi"
+	"libpq-dev" 		
  	"postgresql" 
  	"python"
  	"python2.7" 
