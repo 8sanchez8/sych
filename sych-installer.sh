@@ -88,6 +88,7 @@ pip -q install psycopg2
 echo "Making migrations..."
 python $INSTALLATION_PATH/sych/manage.py makemigrations
 python $INSTALLATION_PATH/sych/manage.py migrate
+python $INSTALLATION_PATH/sych/manage.py collectstatic
 
 echo "Creating superuser..."
 python $INSTALLATION_PATH/sych/manage.py createsuperuser
