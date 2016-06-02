@@ -15,6 +15,9 @@ class ParserBase:
     def parse(self):
         raise NotImplementedError()
 
+    def analyze(self):
+        raise NotImplementedError()
+
     def open_dump(self, file_path):
         """ Открывает файл по переданному аргументу, возвращает объект типа dpkt.pcap"""
 

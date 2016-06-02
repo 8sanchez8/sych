@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
+import re
 import socket
 import sys
 
@@ -44,7 +45,6 @@ class ParserDDoS(ParserBase):
 
         # Цикл попакетной деинкапсуляции дампа средствами dpkt
         for ts, buf in self.pcap:
-            print(counter)
             counter += 1
             eth = dpkt.ethernet.Ethernet(buf)
             ip = eth.data
@@ -100,6 +100,7 @@ class ParserDDoS(ParserBase):
                 elif http.Request.methods.__contains__(header):
                     http_counter += 1
                     http_data = http.Request(tcp.data)
+
                     # print("Request, stream " + str(stream_counter) + "\n" + str(http_data))
                     packet = Packet(timestamp=time, sourceIP=socket.inet_ntoa(ip.src),
                                     sourcePort=tcp.sport, destinationIP=socket.inet_ntoa(ip.dst),
@@ -115,6 +116,10 @@ class ParserDDoS(ParserBase):
                     if http_data.headers.__contains__("host"):
                         packet.hostname = http_data.headers['host']
 
+                    # Проверка, интересен ли нам вообще этот пакет
+                    if not self.analyze(packet):
+                        continue
+
                     packet.save()
                     packet.dump.add(dump)
 
@@ -129,6 +134,33 @@ class ParserDDoS(ParserBase):
                 print("Error: %s" % e)
                 print(headers)
         print("HTTP Packets processed: " + str(http_counter))
+
+    def analyze(self, packet):
+        # Вес. Используется для задания "разборчивости" фильтра
+        weight = 0
+
+        # Проверка User-Agent
+        print(packet.userAgent)
+        if packet.userAgent.__contains__('Googlebot'):
+            return False
+
+        if (len(packet.userAgent) < 12) \
+                or re.compile('python|perl|wget').search(packet.userAgent):
+            weight += 1
+        # Проверка referer
+        print(packet.referer)
+        if packet.referer == None:
+            weight += 1
+        # Проверка requestURI
+        print(packet.requestURI)
+        if packet.requestURI == '/':
+            weight += 1
+
+        print(weight)
+        if weight > 1:
+            return True
+
+        return False
 
 
 def main():
